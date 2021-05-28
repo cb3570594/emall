@@ -9,7 +9,6 @@ export default defineComponent({
   name: 'App',
   setup() {
     onMounted(() => {
-
     })
   },
 })
