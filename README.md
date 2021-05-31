@@ -25,3 +25,11 @@ Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 3. Open `src/main.ts` in VSCode
 4. Open the VSCode command palette
 5. Search and run "Select TypeScript version" -> "Use workspace version"
+
+### Others
+
+1. Generate Logs:
+
+``` cmd
+conventional-changelog -p angular -i CHANGELOG.md -s
+```

@@ -17,7 +17,7 @@ module.exports = {
     'import/no-absolute-path': 'off',
     'import/no-extraneous-dependencies': 'off',
     'vue/no-multiple-template-root': 'off',
-    "no-console": "off",
-    semi: 'never'
+    'no-console': 'off',
+    semi: 'off',
   },
 }
