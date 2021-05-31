@@ -18,6 +18,7 @@ import {
   Card,
   Statistic,
 } from 'ant-design-vue'
+
 export default function createAntdImport(app: App<Element>): App<Element> {
   return app
     .use(Input)

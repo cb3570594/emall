@@ -5,7 +5,10 @@
       <MenuContent />
     </a-layout-sider>
     <a-layout :style="{ marginLeft: '200px', minWidth: '320px' }">
-      <a-layout-header :style="{ background: '#fff' }" class="flex items-center justify-end px-5 py-0">
+      <a-layout-header
+        :style="{ background: '#fff' }"
+        class="flex items-center justify-end px-5 py-0"
+      >
         <HeaderContent />
       </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px 0', overflow: 'initial' }">
@@ -17,17 +20,18 @@
           </router-view> -->
           <RouterView />
         </div>
-        <a-backtop />
+        <a-back-top />
       </a-layout-content>
       <a-layout-footer :style="{ textAlign: 'center' }"> <FooterContent /> </a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import MenuContent from './menu/index.vue'
 import HeaderContent from './header/index.vue'
 import FooterContent from './footer/index.vue'
+
 export default defineComponent({
   components: {
     MenuContent,
