@@ -1,5 +1,41 @@
 import { reactive, ref } from 'vue'
 import type { Ref } from 'vue'
+
+interface OrderInfo {
+  id: string | number
+  no: string
+  price: string
+  status: number
+  payType: number
+  createTime: string
+  updateTime: string
+}
+
+type ApiRequestParams = {
+  pageSize: number
+  current: number
+  no?: string
+  status?: number
+  payType?: number
+  startTime?: string
+  endTime?: string
+}
+
+type ApiResult = {
+  list: OrderInfo[]
+  total: number
+  pageSize: number
+  current: number
+}
+
+type TableData = {
+  columns: Array<any>
+  data: ApiResult
+  // eslint-disable-next-line no-unused-vars
+  getData: (params: ApiRequestParams) => Promise<unknown>
+  loading: Ref<boolean>
+}
+
 export function useTableData(): TableData {
   const columns = [
     {
@@ -60,9 +96,15 @@ export function useTableData(): TableData {
           createTime: '2020-01-02',
           updateTime: '2020-01-03',
         }
-        data.list = Array(100).fill(null).map((item, index) => {
-          return {...mockData, id: index, no: mockData.no + index, status : index % 10 * 10 + 10}
-        }).filter(item => !params.status || item.status === params.status)
+        data.list = Array(100)
+          .fill(null)
+          .map((item, index) => ({
+            ...mockData,
+            id: index,
+            no: mockData.no + index,
+            status: (index % 10) * 10 + 10,
+          }))
+          .filter((item) => !params.status || item.status === params.status)
         data.total = data.list.length
         data.pageSize = params.pageSize
         data.current = params.current
@@ -79,39 +121,6 @@ export function useTableData(): TableData {
   }
 }
 
-interface OrderInfo {
-  id: string | number
-  no: string
-  price: string
-  status: number
-  payType: number
-  createTime: string
-  updateTime: string
-}
-
-type TableData = {
-  columns: Array<any>
-  data: ApiResult
-  getData: (params: ApiRequestParams) => Promise<unknown>
-  loading: Ref<boolean>
-}
-type ApiResult = {
-  list: OrderInfo[]
-  total: number
-  pageSize: number
-  current: number
-}
-
-type ApiRequestParams = {
-  pageSize: number
-  current: number
-  no?: string
-  status?: number
-  payType?: number
-  startTime?: string
-  endTime?: string
-}
-
 export function useOrderStatus() {
   const orderStatus = [
     { name: '全部', status: 0 },
@@ -124,9 +133,9 @@ export function useOrderStatus() {
     { name: '售后中', status: 100 },
     { name: '已售后', status: 110 },
   ]
-  const getOrderStatus = (statusCode: number) => {
-    return orderStatus.find(item => item.status === statusCode)?.name
-  }
+  const getOrderStatus = (statusCode: number) => orderStatus.find(
+    (item) => item.status === statusCode,
+  )?.name
   return {
     orderStatus,
     getOrderStatus,

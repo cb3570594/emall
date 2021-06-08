@@ -18,6 +18,9 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'vue/no-multiple-template-root': 'off',
     'no-console': 'off',
+    'vue/no-v-model-argument': 'off',
+    'object-curly-newline': 'off',
+    'no-plusplus': 'off',
     semi: 'off',
   },
 }

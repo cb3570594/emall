@@ -5,23 +5,21 @@
     </Badge>
     <template #content>
       <Tabs>
-        <template v-for="item in tabListData" :key="item.key">
-          <TabPane>
-            <template #tab>
-              {{ item.name }}
-              <span v-if="item.list.length !== 0">({{ item.list.length }})</span>
+        <TabPane v-for="item in tabListData" :key="item.key">
+          <template #tab>
+            {{ item.name }}
+            <span v-if="item.list.length !== 0">({{ item.list.length }})</span>
+          </template>
+          <List item-layout="horizontal" :data-source="item.list">
+            <template #renderItem="{ item }">
+              <ListItem>
+                <ListItemMeta :description="item.description">
+                  <template #title>{{ item.title }}</template>
+                </ListItemMeta>
+              </ListItem>
             </template>
-            <List item-layout="horizontal" :data-source="item.list">
-              <template #renderItem="{ item }">
-                <ListItem>
-                  <ListItemMeta :description="item.description">
-                    <template #title>{{ item.title }}</template>
-                  </ListItemMeta>
-                </ListItem>
-              </template>
-            </List>
-          </TabPane>
-        </template>
+          </List>
+        </TabPane>
       </Tabs>
     </template>
   </Popover>

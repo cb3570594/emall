@@ -14,6 +14,7 @@ import { defineComponent } from 'vue'
 import { Dropdown, Avatar, Menu } from 'ant-design-vue'
 import { useUserStore } from '@/store/modules/user'
 import { useRouter } from 'vue-router'
+
 export default defineComponent({
   components: {
     Dropdown,
@@ -26,10 +27,8 @@ export default defineComponent({
     const router = useRouter()
 
     const logout = () => {
-      userStore.setUserInfo({
-        userInfo: null,
-      })
-      router.push('login')
+      userStore.logout()
+      router.push('/login')
     }
     return {
       logout,

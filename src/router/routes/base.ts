@@ -1,28 +1,53 @@
 import type { RouteRecordRaw } from 'vue-router'
 import Layout from '@/layouts/default/index.vue'
-export const baseRoutes: RouteRecordRaw = {
-  path: '/',
-  name: '/',
-  component: Layout,
-  redirect: '/index',
-  children: [
-    {
-      path: '/index',
-      name: 'index',
-      component: () => import('@/views/index.vue'),
+import Home from '@/views/index.vue'
+
+export const baseRoutes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    name: '/',
+    component: Layout,
+    redirect: '/home',
+    meta: {
+      title: '首页',
     },
-  ],
-}
+    children: [
+      {
+        path: 'home',
+        name: 'home',
+        meta: {
+          title: '总览',
+        },
+        component: Home,
+      },
+    ],
+  },
+  {
+    path: '/login',
+    name: 'login',
+    meta: {
+      hideMenu: true,
+      title: '登录',
+    },
+    component: () => import('@/views/login/Login.vue'),
+  },
+]
 
 export const errorRoutes: RouteRecordRaw[] = [
   {
     path: '/403',
     name: '403',
+    meta: {
+      title: '403',
+    },
     component: () => import('@/views/error/403.vue'),
   },
   {
     path: '/:p*',
     name: '404',
+    meta: {
+      title: '404',
+    },
     component: () => import('@/views/error/404.vue'),
   },
 ]

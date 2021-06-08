@@ -10,10 +10,11 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref, unref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import Statistic from './components/Statistic.vue'
 import VisitRadar from './components/VisitRadar.vue'
 import SalesProductPie from './components/SalesProductPie.vue'
+
 export default defineComponent({
   components: {
     Statistic,

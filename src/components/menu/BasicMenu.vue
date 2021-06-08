@@ -5,26 +5,38 @@
     :inline-collapsed="collapsed"
     v-model:openKeys="openKeys"
     v-model:selectedKeys="selectedKeys"
+    @click="handleClick"
     @openChange="openCb"
   >
-    <template v-for="item in items" :key="item.path">
-      <BasicSubMenuItem :item="item" :theme="theme" :isHorizontal="isHorizontal" />
-    </template>
+    <BasicSubMenuItem
+      v-for="item in items"
+      :key="item.path"
+      :item="item"
+      :theme="theme"
+      :isHorizontal="isHorizontal"
+    />
   </a-menu>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs, watch, onMounted } from 'vue'
+import type { RouteLocationNormalizedLoaded } from 'vue-router'
+import { defineComponent, reactive, toRefs } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { ss } from '@/utils/storage'
 import BasicSubMenuItem from './BasicSubMenuItem.vue'
 import { basicProps } from './props'
 import type { MenuState } from './types'
-import { useRoute, useRouter } from 'vue-router'
+
+function getPathKey(r: RouteLocationNormalizedLoaded) {
+  const res = r.path.split('/')
+  return res[res.length - 1]
+}
 export default defineComponent({
   name: 'BasicMenu',
   components: {
     BasicSubMenuItem,
   },
   props: basicProps,
-  setup(props) {
+  setup() {
     const state = reactive<MenuState>({
       collapsed: false,
       selectedKeys: [],
@@ -34,28 +46,19 @@ export default defineComponent({
     })
     const router = useRouter()
     const route = useRoute()
-    state.selectedKeys = [route.path]
-    state.openKeys = [route.path.match(/(.*)\/(.*)/)?.[1] || '/']
-    watch(
-      () => route.path,
-      (val) => {
-        state.selectedKeys = [val]
-        const key = val.match(/(.*)\/(.*)/)?.[1] || '/'
-        !state.openKeys.includes(key) && state.openKeys.push(key)
-      }
-    )
-    watch(
-      () => state.selectedKeys,
-      (val) => {
-        router.push(val[0])
-      }
-    )
-    const openCb = (e: any) => {
-      console.log(e)
+    state.selectedKeys = [getPathKey(route)]
+    console.log(route)
+    state.openKeys = ss.getItem('openKeys') || []
+    const openCb = (e: []) => {
+      ss.setItem('openKeys', e)
+    }
+    const handleClick = (e: any) => {
+      router.push({ name: e.key })
     }
     return {
       ...toRefs(state),
-      openCb
+      openCb,
+      handleClick,
     }
   },
 })

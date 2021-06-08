@@ -3,38 +3,40 @@
 </template>
 
 <script lang="ts">
-import type { Menu as MenuType } from '@/router/types'
+import type { RouteRecordRaw } from 'vue-router'
 
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  AppstoreOutlined,
-  TeamOutlined,
-  ShopOutlined,
-} from '@ant-design/icons-vue'
+// import {
+//   UserOutlined,
+//   VideoCameraOutlined,
+//   UploadOutlined,
+//   BarChartOutlined,
+//   CloudOutlined,
+//   AppstoreOutlined,
+//   TeamOutlined,
+//   ShopOutlined,
+// } from '@ant-design/icons-vue'
 import BasicMenu from '@/components/menu/BasicMenu.vue'
 import { defineComponent, reactive } from 'vue'
-import { menus } from '@/config/menu'
+import { usePermissionStore } from '@/store/modules/permission'
+
 export default defineComponent({
   setup() {
-    const items = reactive<MenuType[]>(menus)
+    const permissionStore = usePermissionStore()
+    const items = reactive<RouteRecordRaw[]>(permissionStore.routes)
     return {
       items,
     }
   },
   components: {
     BasicMenu,
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
-    BarChartOutlined,
-    CloudOutlined,
-    AppstoreOutlined,
-    TeamOutlined,
-    ShopOutlined,
+    // UserOutlined,
+    // VideoCameraOutlined,
+    // UploadOutlined,
+    // BarChartOutlined,
+    // CloudOutlined,
+    // AppstoreOutlined,
+    // TeamOutlined,
+    // ShopOutlined,
   },
 })
 </script>

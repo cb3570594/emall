@@ -48,6 +48,7 @@ import type { TableState, TableStateFilters } from 'ant-design-vue/es/table/inte
 import type { UnwrapRef } from 'vue'
 import { defineComponent, ref, reactive, onMounted, computed } from 'vue'
 import { useTableData, useOrderStatus } from './orderTable'
+
 interface FormState {
   orderNo: string
   status: number
@@ -58,9 +59,7 @@ export default defineComponent({
   setup() {
     const { orderStatus, getOrderStatus } = useOrderStatus()
     const { data, getData, loading, columns } = useTableData()
-    const getPayType = (payType: number) => {
-      return ['微信支付', '支付宝支付'][payType]
-    }
+    const getPayType = (payType: number) => ['微信支付', '支付宝支付'][payType]
     const formState: UnwrapRef<FormState> = reactive({
       orderNo: '',
       status: 0,
@@ -77,6 +76,7 @@ export default defineComponent({
     const reset = () => {
       formRef.value.resetFields()
     }
+    // eslint-disable-next-line no-unused-vars
     const handlTableChange = (pag: Pagination, filters: TableStateFilters, sorter: any) => {
       getData({
         current: pag?.current || 1,

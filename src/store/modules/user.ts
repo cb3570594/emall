@@ -1,6 +1,8 @@
+/* eslint-disable import/prefer-default-export */
 import { defineStore } from 'pinia'
 import { getUserInfoById } from '@/api/sys/user'
 import { errorRoutes } from '@/router/routes/base'
+import { ss } from '@/utils/storage'
 import type { RouteRecordName } from 'vue-router'
 
 type UserInfo = {
@@ -23,21 +25,36 @@ export const useUserStore = defineStore({
     token: '',
   }),
   getters: {
-    getUserInfo(): UserInfo {
-      return this.userInfo
+    getToken(): string {
+      return this.token || ss.getItem('token')
     },
-    getToken(): string | null | undefined {
-      return this.token || sessionStorage.getItem('token')
-    },
-    getRole(): string | undefined {
-      return this.userInfo?.role
+    getRole(): string {
+      return this.userInfo?.role || ''
     },
   },
   actions: {
+    logout() {
+      this.setUserInfo({ userInfo: null })
+    },
+    setToken(token: string) {
+      this.token = token
+      ss.setItem('token', token)
+    },
     setUserInfo(params: UserState) {
       this.userInfo = params.userInfo
-      this.token = params.token
-      sessionStorage.setItem('token', params.token || '')
+      this.setToken(params.token || '')
+    },
+    getUserInfo() {
+      if (this.getToken) {
+        this.userInfo = {
+          userId: '',
+          name: 'cboy',
+          mobile: '',
+          permissions: [], // ['demo']
+          role: 'admin',
+        }
+      }
+      return this.userInfo
     },
     resetUserInfo() {
       this.userInfo = null
@@ -48,11 +65,10 @@ export const useUserStore = defineStore({
         const userInfo = await getUserInfoById()
         this.userInfo = userInfo as UserInfo
       }
-      if (errorRoutes.some((item) => item.name === route) || 'index' === route) {
+      if (errorRoutes.some((item) => item.name === route) || route === 'index') {
         return true
-      } else {
-        return this.userInfo?.permissions?.some((item) => item === route)
       }
+      return this.userInfo?.permissions?.some((item) => item === route)
     },
   },
 })

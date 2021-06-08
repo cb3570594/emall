@@ -26,18 +26,18 @@
 <script lang="ts">
 import type { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
 import type { UnwrapRef } from 'vue'
-import { defineComponent, reactive, ref, toRaw } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import { useUserStore } from '@/store/modules/user'
 import { useRouter, useRoute } from 'vue-router'
 import { message } from 'ant-design-vue'
 import { useFormRules } from '@/utils/rules'
+
 interface FormState {
   account: string | never
   password: string | never
 }
 export default defineComponent({
-  components: {
-  },
+  components: {},
   setup() {
     const userStore = useUserStore()
     const router = useRouter()
@@ -50,37 +50,35 @@ export default defineComponent({
     })
     const formRef = ref()
     const loading = ref(false)
-
     const login = () => {
       formRef.value
         .validate()
-        .then(() => {
+        .then((v: FormState) => {
           loading.value = true
-          if (formData.account === 'cboy' && formData.password === '123456') {
-            setTimeout(() => {
-              userStore.setUserInfo({
-                userInfo: {
-                  userId: '',
-                  name: formData.account,
-                  mobile: '',
-                  permissions: [], // ['demo']
-                  role: '',
-                },
-                token: 'token',
-              })
-              loading.value = false
-              router.replace((route.query.redirect as string) || '/')
-            }, 5e2)
+          let msg = ''
+          if (v.account === 'cboy' && v.password === '123456') {
+            msg = '登录成功'
           } else {
-            message.error('账号或密码错误')
-            loading.value = false
+            msg = '游客身份'
           }
+          setTimeout(() => {
+            userStore.setToken('token')
+            loading.value = false
+            router.replace((route.query.redirect as string) || '/')
+            message.success(msg)
+          }, 5e2)
         })
         .catch((error: ValidateErrorEntity<FormState>) => {
           console.log('error', error)
         })
     }
-    return { formRef, login, formData, rules, loading }
+    return {
+      formRef,
+      login,
+      formData,
+      rules,
+      loading,
+    }
   },
 })
 </script>
