@@ -17,6 +17,7 @@ import {
   Result,
   Card,
   Statistic,
+  Tree,
 } from 'ant-design-vue'
 
 export default function createAntdImport(app: App<Element>): App<Element> {
@@ -37,4 +38,5 @@ export default function createAntdImport(app: App<Element>): App<Element> {
     .use(Result)
     .use(Card)
     .use(Statistic)
+    .use(Tree)
 }

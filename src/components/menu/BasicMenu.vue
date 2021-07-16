@@ -48,11 +48,13 @@ export default defineComponent({
     const route = useRoute()
     state.selectedKeys = [getPathKey(route.path)]
     state.openKeys = ss.getItem('openKeys') || []
-    watch(() => route.path, (path: string) => {
-      state.selectedKeys = [getPathKey(path)]
-    })
+    watch(
+      () => route.path,
+      (path: string) => {
+        state.selectedKeys = [getPathKey(path)]
+      },
+    )
     const openCb = (e: []) => {
-      console.log(e)
       ss.setItem('openKeys', e)
     }
     const handleClick = (e: any) => {

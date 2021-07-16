@@ -10,7 +10,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
  * @extra
  */
 import { resolve } from 'path'
-
+import { getThemeVariables } from 'ant-design-vue/dist/theme'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -38,6 +38,9 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
+        modifyVars: getThemeVariables({
+          dark: false, // 开启暗黑模式
+        }),
         javascriptEnabled: true,
       },
     },
