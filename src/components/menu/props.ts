@@ -38,6 +38,10 @@ export const itemProps = {
     type: Object as PropType<Menu>,
     default: {},
   },
+  pathKey: {
+    type: String,
+    default: '',
+  },
   level: propTypes.number,
   theme: propTypes.oneOf(['dark', 'light']),
   showTitle: propTypes.bool,

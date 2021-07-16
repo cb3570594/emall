@@ -11,6 +11,7 @@
     <BasicSubMenuItem
       v-for="item in items"
       :key="item.path"
+      :pathKey="item.path"
       :item="item"
       :theme="theme"
       :isHorizontal="isHorizontal"
@@ -18,16 +19,15 @@
   </a-menu>
 </template>
 <script lang="ts">
-import type { RouteLocationNormalizedLoaded } from 'vue-router'
-import { defineComponent, reactive, toRefs } from 'vue'
+import { defineComponent, reactive, toRefs, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ss } from '@/utils/storage'
 import BasicSubMenuItem from './BasicSubMenuItem.vue'
 import { basicProps } from './props'
 import type { MenuState } from './types'
 
-function getPathKey(r: RouteLocationNormalizedLoaded) {
-  const res = r.path.split('/')
+function getPathKey(path: string) {
+  const res = path.split('/')
   return res[res.length - 1]
 }
 export default defineComponent({
@@ -46,10 +46,13 @@ export default defineComponent({
     })
     const router = useRouter()
     const route = useRoute()
-    state.selectedKeys = [getPathKey(route)]
-    console.log(route)
+    state.selectedKeys = [getPathKey(route.path)]
     state.openKeys = ss.getItem('openKeys') || []
+    watch(() => route.path, (path: string) => {
+      state.selectedKeys = [getPathKey(path)]
+    })
     const openCb = (e: []) => {
+      console.log(e)
       ss.setItem('openKeys', e)
     }
     const handleClick = (e: any) => {

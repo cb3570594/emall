@@ -1,7 +1,7 @@
 <template>
   <a-layout>
     <a-layout-sider
-      class="menu-sider scrollbar "
+      class="menu-sider scrollbar-none"
       :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, zIndex: 999 }"
     >
       <div class="logo" />

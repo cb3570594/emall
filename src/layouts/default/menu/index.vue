@@ -23,6 +23,7 @@ export default defineComponent({
   setup() {
     const permissionStore = usePermissionStore()
     const items = reactive<RouteRecordRaw[]>(permissionStore.routes)
+    console.log(items)
     return {
       items,
     }

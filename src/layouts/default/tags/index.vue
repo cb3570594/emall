@@ -6,34 +6,36 @@
       closable
       @close="close(item, index)"
       @click="changeTag(item)"
-      :color="active === item.title ? '#108ee9' : ''"
-      >{{ item.title }}</a-tag
+      :color="active === item.fullPath ? '#108ee9' : ''"
+      >{{ item.meta.title }}</a-tag
     >
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useTagsStore } from '@/store/modules/tags'
 
 export default defineComponent({
   setup() {
-    const tags = reactive({
-      list: [{ title: '首页' }, { title: '详情' }],
-      active: '首页',
-    })
-    // todo: item中既存路由信息，又存该页面的实例
-    const close = (item: any, index: number) => {
-      console.log(item)
-      tags.list.splice(index, 1)
-    }
+    const tagStore = useTagsStore()
+    const router = useRouter()
+    const list = computed(() => tagStore.list)
+    const active = computed(() => tagStore.active)
     const changeTag = (item: any) => {
       console.log(item)
-      if (item.title === tags.active) {
+      if (item.fullPath === active) {
         return
       }
-      tags.active = item.title
+      router.replace(item)
+    }
+    // todo: item中既存路由信息，又存该页面的实例
+    const close = (item: any, index: number) => {
+      tagStore.delTag(index, router)
     }
     return {
-      ...toRefs(tags),
+      list,
+      active,
       close,
       changeTag,
     }

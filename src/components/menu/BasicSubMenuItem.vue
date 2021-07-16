@@ -1,14 +1,15 @@
 <template>
   <BasicMenuItem v-if="!menuHasChildren(item) && getShowMenu" v-bind="$props" />
-  <a-sub-menu v-if="menuHasChildren(item) && getShowMenu">
+  <a-sub-menu v-else-if="menuHasChildren(item) && getShowMenu" v-bind="$props"
+   :key="$props.pathKey">
     <template #title>
       <MenuItemContent v-bind="$props" :item="item" />
     </template>
-
     <BasicSubMenuItem
       v-for="childrenItem in item.children || []"
-      :key="childrenItem.path"
       v-bind="$props"
+      :key="childrenItem.path"
+      :pathKey="childrenItem.path"
       :item="childrenItem"
     />
   </a-sub-menu>
@@ -28,6 +29,7 @@ export default defineComponent({
   },
   props: itemProps,
   setup(props) {
+    console.log(props)
     const getShowMenu = computed(() => !props.item.meta?.hideMenu)
     const menuHasChildren = (item: MenuType) => item.children && item.children.length > 0
     return {

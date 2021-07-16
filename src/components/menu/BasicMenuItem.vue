@@ -1,5 +1,5 @@
 <template>
-  <a-menu-item>
+  <a-menu-item :key="$props.pathKey">
     <MenuItemContent v-bind="$props" :item="item"></MenuItemContent>
   </a-menu-item>
 </template>

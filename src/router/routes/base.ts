@@ -38,6 +38,7 @@ export const errorRoutes: RouteRecordRaw[] = [
     path: '/403',
     name: '403',
     meta: {
+      hideMenu: true,
       title: '403',
     },
     component: () => import('@/views/error/403.vue'),
@@ -46,6 +47,7 @@ export const errorRoutes: RouteRecordRaw[] = [
     path: '/:p*',
     name: '404',
     meta: {
+      hideMenu: true,
       title: '404',
     },
     component: () => import('@/views/error/404.vue'),
