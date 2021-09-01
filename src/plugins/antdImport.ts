@@ -18,6 +18,8 @@ import {
   Card,
   Statistic,
   Tree,
+  Pagination,
+  DatePicker,
 } from 'ant-design-vue'
 
 export default function createAntdImport(app: App<Element>): App<Element> {
@@ -39,4 +41,6 @@ export default function createAntdImport(app: App<Element>): App<Element> {
     .use(Card)
     .use(Statistic)
     .use(Tree)
+    .use(Pagination)
+    .use(DatePicker)
 }

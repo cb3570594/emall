@@ -26,11 +26,11 @@
     @change="handlTableChange"
     class="mt-5"
   >
-    <template #status="{record}">
-      <span>{{getOrderStatus(record.status)}}</span>
+    <template #status="{ record }">
+      <span>{{ getOrderStatus(record.status) }}</span>
     </template>
-    <template #payType="{record}">
-      <span>{{getPayType(record.payType)}}</span>
+    <template #payType="{ record }">
+      <span>{{ getPayType(record.payType) }}</span>
     </template>
     <template #action="{ record }">
       <span class="text-xs">

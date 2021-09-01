@@ -86,43 +86,43 @@ const asyncRoutes: RouteRecordRaw[] = [
       },
     ],
   },
-  {
-    path: '/multi-level',
-    meta: {
-      title: '多级菜单',
-    },
-    component: () => import('@/layouts/default/index.vue'),
-    children: [
-      {
-        path: 'multi-level1',
-        name: 'multi-level1',
-        meta: {
-          title: '多级菜单1',
-        },
-        component: () => import('@/views/multi-level1/index.vue'),
-        children: [
-          {
-            path: 'multi-level2',
-            name: 'multi-level2',
-            meta: {
-              title: '多级菜单2',
-            },
-            component: () => import('@/views/multi-level1/multi-level2/index.vue'),
-            children: [
-              {
-                path: 'multi-level3',
-                name: 'multi-level3',
-                meta: {
-                  title: '多级菜单3',
-                },
-                component: () => import('@/views/multi-level1/multi-level2/multi-level3/index.vue'),
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+  // {
+  //   path: '/multi-level',
+  //   meta: {
+  //     title: '多级菜单',
+  //   },
+  //   component: () => import('@/layouts/default/index.vue'),
+  //   children: [
+  //     {
+  //       path: 'multi-level1',
+  //       name: 'multi-level1',
+  //       meta: {
+  //         title: '多级菜单1',
+  //       },
+  //       component: () => import('@/views/multi-level1/index.vue'),
+  //       children: [
+  //         {
+  //           path: 'multi-level2',
+  //           name: 'multi-level2',
+  //           meta: {
+  //             title: '多级菜单2',
+  //           },
+  //           component: () => import('@/views/multi-level1/multi-level2/index.vue'),
+  //           children: [
+  //             {
+  //               path: 'multi-level3',
+  //               name: 'multi-level3',
+  //               meta: {
+  //                 title: '多级菜单3',
+  //               },
+  //               component: () => import('@/views/multi-level1/multi-level2/multi-level3/index.vue'),
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
 ]
 
 export default asyncRoutes
