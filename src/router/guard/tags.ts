@@ -1,6 +1,7 @@
 import type { Router } from 'vue-router'
 import { useTagsStore } from '@/store/modules/tags'
 import setting from '@/config/setting'
+import { baseRoutes, errorRoutes } from '@/router/routes/base'
 
 const title = setting.title || 'Vue Admin Template'
 export function getPageTitle(pageTitle: string | unknown) {
@@ -16,6 +17,9 @@ export default function createTagsGuard(router: Router) {
     document.title = getPageTitle(to.meta.title)
 
     const tagsStore = useTagsStore()
-    tagsStore.addTag(to)
+    // 不放入标签的页面
+    if (![...baseRoutes, ...errorRoutes].find((item) => item.name === to.name)) {
+      tagsStore.addTag(to)
+    }
   })
 }

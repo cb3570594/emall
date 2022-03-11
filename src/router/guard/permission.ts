@@ -25,7 +25,7 @@ export default function createPermissionGuard(router: Router) {
     if (role) {
       next()
     } else {
-      role = await userStore.getUserInfo()?.role || ''
+      role = (await userStore.getUserInfo()?.role) || ''
       if (!role) {
         next({
           path: '/login',

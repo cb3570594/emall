@@ -7,17 +7,10 @@
           <a-input size="large" v-model:value="formData.account" placeholder="请输入用户名" />
         </a-form-item>
         <a-form-item name="password" class="enter-x">
-          <a-input-password
-            size="large"
-            visibilityToggle
-            v-model:value="formData.password"
-            placeholder="请输入密码"
-          />
+          <a-input-password size="large" visibilityToggle v-model:value="formData.password" placeholder="请输入密码" />
         </a-form-item>
         <a-form-item class="enter-x">
-          <a-button type="primary" size="large" block @click="login" :loading="loading">
-            登录
-          </a-button>
+          <a-button type="primary" size="large" block @click="login" :loading="loading"> 登录 </a-button>
         </a-form-item>
       </a-form>
     </div>

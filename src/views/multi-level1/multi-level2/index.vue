@@ -1,7 +1,7 @@
 <template>
-  <div>multi-level2
+  <div>
+    multi-level2
     <router-view></router-view>
-
   </div>
 </template>
 
@@ -15,5 +15,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

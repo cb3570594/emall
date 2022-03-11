@@ -34,11 +34,13 @@
       <img :src="text" alt="" class="product-img" />
     </template>
     <template #action>
-      <a-button type="primary" shape="circle" size="14">
-        <template #icon>
-          <FormOutlined />
-        </template>
-      </a-button>
+      <router-link :to="{ name: 'product-detail', params: { id: 1 } }">
+        <a-button type="primary" shape="circle" size="14">
+          <template #icon>
+            <FormOutlined />
+          </template>
+        </a-button>
+      </router-link>
       <a-divider type="vertical" />
       <a-button type="primary" danger shape="circle" size="14">
         <template #icon>

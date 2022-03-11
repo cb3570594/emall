@@ -1,6 +1,6 @@
 import type { Router } from 'vue-router'
 import nProgress from 'nprogress'
-import 'nprogress/nprogress.css';
+import 'nprogress/nprogress.css'
 
 export default function createProgressGuard(router: Router) {
   router.beforeEach(async () => {

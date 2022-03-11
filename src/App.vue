@@ -9,7 +9,7 @@ export default defineComponent({
   name: 'App',
   setup() {
     onMounted(() => {
-      document.body.style.minWidth = `${window.outerWidth}px`
+      document.body.style.minWidth = `${window.innerWidth}px`
     })
   },
 })

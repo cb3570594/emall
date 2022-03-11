@@ -20,6 +20,9 @@ import {
   Tree,
   Pagination,
   DatePicker,
+  Modal,
+  Switch,
+  Upload,
 } from 'ant-design-vue'
 
 export default function createAntdImport(app: App<Element>): App<Element> {
@@ -43,4 +46,7 @@ export default function createAntdImport(app: App<Element>): App<Element> {
     .use(Tree)
     .use(Pagination)
     .use(DatePicker)
+    .use(Modal)
+    .use(Switch)
+    .use(Upload)
 }

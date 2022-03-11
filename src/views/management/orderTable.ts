@@ -133,9 +133,7 @@ export function useOrderStatus() {
     { name: '售后中', status: 100 },
     { name: '已售后', status: 110 },
   ]
-  const getOrderStatus = (statusCode: number) => orderStatus.find(
-    (item) => item.status === statusCode,
-  )?.name
+  const getOrderStatus = (statusCode: number) => orderStatus.find((item) => item.status === statusCode)?.name
   return {
     orderStatus,
     getOrderStatus,

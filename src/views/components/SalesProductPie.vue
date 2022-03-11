@@ -7,6 +7,7 @@
 import type { Ref } from 'vue'
 import { defineComponent, onMounted, ref, unref, watch, nextTick } from 'vue'
 import echarts from '@/utils/echarts'
+
 export default defineComponent({
   props: {
     loading: Boolean,
@@ -37,20 +38,18 @@ export default defineComponent({
                   { value: 310, name: '服装' },
                   { value: 274, name: '化妆品' },
                   { value: 400, name: '家居' },
-                ].sort(function (a, b) {
-                  return a.value - b.value
-                }),
+                ].sort((a, b) => a.value - b.value),
                 roseType: 'radius',
                 animationType: 'scale',
                 animationEasing: 'exponentialInOut',
-                animationDelay: function () {
+                animationDelay() {
                   return Math.random() * 400
                 },
               },
             ],
           })
         })
-      }
+      },
     )
 
     return {

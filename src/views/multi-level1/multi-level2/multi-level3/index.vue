@@ -1,5 +1,5 @@
 <template>
-  <div>{{params}}</div>
+  <div>{{ params }}</div>
 </template>
 
 <script lang="ts">
@@ -16,5 +16,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

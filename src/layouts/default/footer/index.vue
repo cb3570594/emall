@@ -4,6 +4,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { CopyrightOutlined } from '@ant-design/icons-vue'
+
 export default defineComponent({
   components: {
     CopyrightOutlined,

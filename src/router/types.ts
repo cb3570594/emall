@@ -1,9 +1,9 @@
 export interface Menu {
-  name: string;
+  name: string
 
-  path: string;
+  path: string
 
-  children?: Menu[];
+  children?: Menu[]
 
   meta?: {
     [k: string]: any
